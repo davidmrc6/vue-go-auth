@@ -3,7 +3,7 @@ package utils
 import (
 	"backend/models"
 
-	"github.com/dgrijalva/jwt-go"
+	jwt "github.com/golang-jwt/jwt/v5"
 )
 
 func ParseToken(tokenString string) (claims *models.Claims, err error) {

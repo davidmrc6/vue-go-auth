@@ -8,8 +8,8 @@ import (
 	"backend/utils"
 	"time"
 
-	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
+	jwt "github.com/golang-jwt/jwt/v5"
 )
 
 // JWT Key user for signing JWT tokens.
@@ -62,15 +62,14 @@ func Login(c *gin.Context) {
 
 	claims := &models.Claims{
 		Role: existingUser.Role,
-		StandardClaims: jwt.StandardClaims{
+		RegisteredClaims: jwt.RegisteredClaims{
 			Subject: existingUser.Email,
-			ExpiresAt: expirationTime.Unix(),
+			ExpiresAt: jwt.NewNumericDate(expirationTime),
 		},
 	}
 
 	// Generate JWT token.
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-
 	tokenString, err := token.SignedString(jwtKey)
 
 	if err != nil {
