@@ -18,10 +18,12 @@ const handleRegister = async (credentials: User) => {
 </script>
 
 <template>
-   <div class="flex min-h-screen w-full max-w-4xl mx-auto justify-center">
-    <RegisterForm
-      :on-submit="handleRegister"
-      :error="error"
-    />
+  <div class="w-full bg-gray-100">
+    <div class="flex min-h-screen w-full max-w-4xl mx-auto items-center justify-center">
+      <RegisterForm
+        :on-submit="handleRegister"
+        :error="error"
+      />
+    </div>
   </div>
 </template>

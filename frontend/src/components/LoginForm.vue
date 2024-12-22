@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import router from '@/router';
 import { ref } from 'vue';
 
 
@@ -24,9 +25,12 @@ const handleSubmit = () => {
 </script>
 
 <template>
-  <div>
-    <form class="flex flex-col space-y-1">
-      <span v-if="error">
+  <div class="flex flex-col bg-gray-200 rounded-md w-[26rem] h-[20rem] justify-center items-center shadow-lg">
+    <form class="flex flex-col space-y-1 w-full max-w-[60%]">
+      <span
+        v-if="error"
+        class="text-red-600 text-sm block h-[1.25rem]"
+      >
         {{ error }}
       </span>
       <input
@@ -47,5 +51,10 @@ const handleSubmit = () => {
         Log in
       </button>
     </form>
+    <div>
+      <span class="text-sm">
+        New? <button @click="() => router.push('/register')">Register here.</button>
+      </span>
+    </div>
   </div>
 </template>

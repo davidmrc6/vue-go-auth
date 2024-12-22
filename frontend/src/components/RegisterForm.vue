@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import router from '@/router';
 import { ref } from 'vue';
-
 
 const props = defineProps({
   onSubmit: {
@@ -26,7 +26,7 @@ const handleSubmit = () => {
 </script>
 
 <template>
-  <div>
+  <div class="flex flex-col bg-gray-200 rounded-md w-[26rem] h-[20rem] justify-center items-center shadow-lg">
     <form class="flex flex-col space-y-1">
       <span v-if="error">
         {{ error }}
@@ -52,8 +52,13 @@ const handleSubmit = () => {
       <button
         @click.prevent="handleSubmit"
       >
-        Log in
+        Register
       </button>
     </form>
+    <div>
+      <span class="text-sm">
+        Already have an account? <button @click="() => router.push('/login')">Log in.</button>
+      </span>
+    </div>
   </div>
 </template>

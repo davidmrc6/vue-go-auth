@@ -37,6 +37,11 @@ router.beforeEach(async (to, from, next) => {
     }
   }
 
+  // Remove any errors when user first gets to login/register page.
+  if (authStore.error) {
+    authStore.clearError()
+  }
+
   if (to.meta.requiresAuth && !authStore.isAuthenticated) {
     // Redirect user to login if trying to access a protected route.
     next('/login')

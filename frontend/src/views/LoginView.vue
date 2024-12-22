@@ -18,10 +18,12 @@ const handleLogin = async (credentials: LoginCredentials) => {
 </script>
 
 <template>
-   <div class="flex min-h-screen w-full max-w-4xl mx-auto justify-center">
-    <LoginForm
-      :on-submit="handleLogin"
-      :error="error"
-    />
+  <div class="w-full bg-gray-100">
+    <div class="flex min-h-screen w-full max-w-4xl mx-auto items-center justify-center">
+      <LoginForm
+        :on-submit="handleLogin"
+        :error="error"
+      />
+    </div>
   </div>
 </template>

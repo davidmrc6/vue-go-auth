@@ -19,15 +19,6 @@ const handleLogout = async () => {
 </script>
 
 <template>
-  <header>
-    <div class="flex flex-col bg-neutral-900 text-white w-full">
-      <nav class="flex items-center justify-center gap-4">
-        <RouterLink to="/">Home</RouterLink>
-        <button v-if="isAuthenticated" @click="handleLogout"> Log out </button>
-      </nav>
-    </div>
-  </header>
-
   <RouterView />
 </template>
 
