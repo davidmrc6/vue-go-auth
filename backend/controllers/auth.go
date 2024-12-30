@@ -6,6 +6,7 @@ package controllers
 import (
 	"backend/models"
 	"backend/utils"
+	"os"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -14,7 +15,7 @@ import (
 
 // JWT Key user for signing JWT tokens.
 // TODO: This should be loaded from environmental variables in production.
-var jwtKey = []byte("placeholder_key")
+var jwtKey = []byte(os.Getenv("JWT_SECRET_KEY"))
 
 // `Login` handles user login logic and JWT token generation.
 //

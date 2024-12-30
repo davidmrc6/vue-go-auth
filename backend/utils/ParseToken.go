@@ -2,13 +2,14 @@ package utils
 
 import (
 	"backend/models"
+	"os"
 
 	jwt "github.com/golang-jwt/jwt/v5"
 )
 
 func ParseToken(tokenString string) (claims *models.Claims, err error) {
 	token, err := jwt.ParseWithClaims(tokenString, &models.Claims{}, func(token *jwt.Token) (interface{}, error) {
-		return []byte("placeholder_key"), nil
+		return []byte(os.Getenv("JWT_SECRET_KEY")), nil
 	})
 
 	if err != nil {
