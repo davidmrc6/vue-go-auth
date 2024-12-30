@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import router from '@/router';
-import { ref } from 'vue';
-
+import { ref, computed } from 'vue';
 
 const props = defineProps({
   onSubmit: {
@@ -11,12 +10,35 @@ const props = defineProps({
   error: {
     type: [String, null],
     default: '',
-  }
+  },
+  loading: {
+    type: Boolean,
+    default: false,
+  },
 })
 
 const form = ref({
   email: '',
   password: '',
+})
+const passwordVisible = ref(false)
+
+// Regex pattern to validate email
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+// Check email validity
+const emailError = computed(() => {
+  return !emailRegex.test(form.value.email) && form.value.email !== ''
+    ? 'Invalid email address.'
+    : ''
+})
+
+const changePasswordVisibility = () => {
+  passwordVisible.value = !passwordVisible.value
+}
+
+const passwordFieldType = computed(() => {
+  return passwordVisible.value ? 'text' : 'password'
 })
 
 const handleSubmit = () => {
@@ -33,22 +55,31 @@ const handleSubmit = () => {
       >
         {{ error }}
       </span>
+      <span v-else-if="emailError">
+        {{ emailError }}
+      </span>
       <input
         v-model="form.email"
         type="text"
         placeholder="email"
         class="px-1"
       >
-      <input
-        v-model="form.password"
-        type="password"
-        placeholder="password"
-        class="px-1"
-      >
+      <span class="flex">
+        <input
+          v-model="form.password"
+          :type="passwordFieldType"
+          placeholder="password"
+          class="px-1"
+        >
+        <button @click="changePasswordVisibility" type="button">
+          {{ passwordVisible ? "Hide" : "Show" }}
+        </button>
+      </span>
       <button
         @click.prevent="handleSubmit"
+        :disabled="loading"
       >
-        Log in
+        {{ loading ? "Loading" : "Log in" }}
       </button>
     </form>
     <div>

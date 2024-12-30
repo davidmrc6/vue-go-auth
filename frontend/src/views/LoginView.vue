@@ -23,6 +23,7 @@ const handleLogin = async (credentials: LoginCredentials) => {
       <LoginForm
         :on-submit="handleLogin"
         :error="error"
+        :loading="loading"
       />
     </div>
   </div>

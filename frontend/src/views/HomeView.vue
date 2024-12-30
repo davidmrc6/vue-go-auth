@@ -8,7 +8,8 @@ const authStore = useAuthStore()
 const { user, loading, isAuthenticated } = storeToRefs(authStore)
 
 const handleLogout = async () => {
-  try { await authStore.logout()
+  try {
+    await authStore.logout()
     router.push('/login')
   } catch (error) {
     console.error(error)

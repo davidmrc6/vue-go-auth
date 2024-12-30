@@ -23,6 +23,7 @@ const handleRegister = async (credentials: User) => {
       <RegisterForm
         :on-submit="handleRegister"
         :error="error"
+        :loading="loading"
       />
     </div>
   </div>

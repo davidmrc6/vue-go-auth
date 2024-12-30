@@ -26,3 +26,11 @@ npm run dev
 cd backend/
 go run main.go
 ```
+
+## TO DO
+- [ ] Change "plcaholder_key" for jwt key signature
+- [x] Implement email regex verification (maybe this should be handled in the frontend)
+- [ ] Add "loading circle" when signing in
+- [ ] Add option to log in with username (not only email)
+- [x] Add option to see password when typing it
+- [ ] Improve UI
