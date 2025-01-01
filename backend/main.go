@@ -3,6 +3,7 @@ package main
 import (
 	"backend/models"
 	"backend/routes"
+	"fmt"
 	"log"
 	"os"
 
@@ -27,6 +28,8 @@ func main() {
 		DBName:			os.Getenv("DB_NAME"),
 		SSLMode:		os.Getenv("DB_SSLMODE"),
 	}
+
+	fmt.Println(os.Getenv("JWT_SECRET_KEY"))
 
 	// Initialize database.
 	models.InitDB(config)

@@ -4,6 +4,9 @@ export default {
   content: [],
   theme: {
     extend: {},
+    fontFamily: {
+      'sans': ['Niramit', 'Sans-serif'],
+    },
   },
   plugins: [],
 }

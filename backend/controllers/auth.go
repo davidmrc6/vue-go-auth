@@ -6,16 +6,11 @@ package controllers
 import (
 	"backend/models"
 	"backend/utils"
-	"os"
 	"time"
 
 	"github.com/gin-gonic/gin"
 	jwt "github.com/golang-jwt/jwt/v5"
 )
-
-// JWT Key user for signing JWT tokens.
-// TODO: This should be loaded from environmental variables in production.
-var jwtKey = []byte(os.Getenv("JWT_SECRET_KEY"))
 
 // `Login` handles user login logic and JWT token generation.
 //
@@ -71,7 +66,7 @@ func Login(c *gin.Context) {
 
 	// Generate JWT token.
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	tokenString, err := token.SignedString(jwtKey)
+	tokenString, err := token.SignedString(utils.GetJWTKey())
 
 	if err != nil {
 		c.JSON(500, gin.H{"error": "Could not generate JWT token."})
@@ -206,13 +201,13 @@ func Me(c *gin.Context) {
 	claims, err := utils.ParseToken(cookie)
 
 	if err != nil {
-		c.JSON(401, gin.H{"error": "Unauthorized"})
+		c.JSON(401, gin.H{"error": "Unauthorized."})
 		return
 	}
 
 	// Verify role
 	if claims.Role != "user" && claims.Role != "admin" {
-			c.JSON(401, gin.H{"error": "Unauthorized"})
+			c.JSON(401, gin.H{"error": "Unauthorized."})
 			return
 	}
 
